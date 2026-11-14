@@ -549,7 +549,7 @@
     "subtitle": "配置此本地项目的模型凭证和市场数据源 Token。",
     "unavailable": "设置不可用",
     "llmSettings": "LLM 设置",
-    "llmSettingsDesc": "选择智能体使用的模型，并将其保存到项目本地的 agent/.env 文件中。",
+    "llmSettingsDesc": "选择智能体使用的模型，并保存到 ~/.vibe-trading/.env。",
     "connection": "连接",
     "model": "模型",
     "useProviderDefaults": "使用提供商默认设置",
@@ -1276,8 +1276,7 @@
       "failed": "失败",
       "steps": "{{count}} 个步骤",
       "continue": "继续",
-      "reattach": "重新连接",
-      "checkingFigures": "正在核对答案中的数字（第 {{round}} 轮）…"
+      "reattach": "重新连接"
     },
     "resumeConnector": "恢复连接器",
     "resumeConnectorTitle": "清除熔断开关并恢复连接器活动",
@@ -1596,6 +1595,8 @@
       "expiryDays": "到期天数",
       "volatility": "波动率（%）",
       "riskFreeRate": "无风险利率（%）",
+      "underlyingQty": "标的持仓单位",
+      "underlyingQtyHint": "0：仅期权。1：持有一个合约乘数的股票（乘数为 100 时持有 100 股）。",
       "multiplier": "合约乘数",
       "multiplierHint": "100 = 美股标准合约",
       "commissionRate": "佣金率（%）",
@@ -1688,6 +1689,31 @@
       "noData": "该选择下未返回合约。",
       "errorTitle": "期权链不可用",
       "retry": "重试"
+    },
+    "expiryScenarios": {
+      "input": "到期价格（可选，逗号分隔）",
+      "title": "到期场景",
+      "spot": "到期价格",
+      "pnl": "到期盈亏",
+      "return": "股票名义本金收益率"
+    },
+    "comparison": {
+      "title": "方案比较",
+      "basis": "保存期权腿后，修改构建器即可比较。各方案共用当前入场价、股票仓位、到期和费用。收益率按初始股票名义本金计算；纯期权没有该分母。",
+      "current": "当前方案",
+      "saved": "方案 {{index}}",
+      "save": "保存期权腿用于比较",
+      "remove": "移除",
+      "metric": "指标",
+      "alternative": "备选方案",
+      "baseline": "基准方案",
+      "difference": "差值（百分点）",
+      "max_profit_return": "最高收益率",
+      "max_loss_return": "最低收益率",
+      "entry_cost_return": "入场成本／股票名义本金",
+      "higher": "高于",
+      "lower": "低于",
+      "equal": "相等"
     }
   },
   "alphaZoo": {
@@ -1920,6 +1946,9 @@
     "expiresAt": "{{time}} 到期"
   },
   "swarmStatus": {
+    "partialResults": "已有成果（未完成）",
+    "report": "报告",
+    "continueWork": "继续未完成的工作",
     "agents": "{{done}}/{{total}} 个智能体",
     "layer": "第 {{current}}/{{total}} 轮",
     "agent": "智能体",
@@ -2745,5 +2774,25 @@
     "rolling": "滚动窗口",
     "expanding": "扩展窗口",
     "invalidChoices": "请填写每个候选值，逗号之间不能留空。"
+  },
+  "updates": {
+    "title": "软件更新",
+    "preserve": "更新会沿用现有配置、凭据和会话。请保持相同的安装账户和数据目录。",
+    "check": "检查更新",
+    "working": "请稍候…",
+    "current": "运行版本：{{version}}",
+    "available": "发现新版本：{{version}}",
+    "currentLatest": "最新发布版：{{version}}，暂无更高版本。",
+    "pip": "在服务所在机器的原 Python 环境中运行此命令，然后重启服务。",
+    "container": "在部署主机上按原 Compose 配置更新镜像或重新构建服务，保留所有现有数据卷。",
+    "desktop": "请先结束正在进行的任务。应用将关闭、安装已验证的更新并重新打开。",
+    "source": "通过原源码目录或包管理器更新，保留本地改动、可选依赖和版本约束，然后重启原服务。",
+    "manual": "此构建尚无自动更新渠道。请从原发布方获取下一版 Desktop，覆盖安装并保留用户数据。",
+    "completed": "目标 Desktop 版本及其后端已启动。",
+    "interrupted": "上次更新未正常完成。重试前请检查桌面日志，不要删除配置或恢复文件。",
+    "install": "更新并重启",
+    "installing": "正在下载并验证更新，安装后应用将重新启动。",
+    "checkFailed": "无法检查更新，请检查网络或服务访问权限后重试。",
+    "installFailed": "更新未能交接给安装程序，数据已保留。请检查桌面日志，然后重新检查更新。"
   }
 }

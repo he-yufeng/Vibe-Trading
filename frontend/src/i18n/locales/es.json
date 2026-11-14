@@ -555,7 +555,7 @@
     "subtitle": "Configura las credenciales del modelo y los tokens de fuentes de datos de mercado para este proyecto local.",
     "unavailable": "La configuración no está disponible",
     "llmSettings": "Configuración del LLM",
-    "llmSettingsDesc": "Elige el modelo que usará el agente y guárdalo en el archivo agent/.env local del proyecto.",
+    "llmSettingsDesc": "Elige el modelo que usará el agente y guárdalo en ~/.vibe-trading/.env.",
     "connection": "Conexión",
     "model": "Modelo",
     "useProviderDefaults": "Usar valores predeterminados del proveedor",
@@ -1282,8 +1282,7 @@
       "failed": "Falló",
       "steps": "{{count}} pasos",
       "continue": "Continuar",
-      "reattach": "Reconectar",
-      "checkingFigures": "Verificando las cifras de esta respuesta (ronda {{round}})…"
+      "reattach": "Reconectar"
     },
     "resumeConnector": "Reanudar conector",
     "resumeConnectorTitle": "Desactivar el interruptor de emergencia y reanudar la actividad del conector",
@@ -1602,6 +1601,8 @@
       "expiryDays": "Días a vencimiento",
       "volatility": "Volatilidad (%)",
       "riskFreeRate": "Tasa libre de riesgo (%)",
+      "underlyingQty": "Unidades del subyacente",
+      "underlyingQtyHint": "0: solo opciones. 1: mantener tantas acciones como el multiplicador (100 acciones si es 100).",
       "multiplier": "Multiplicador",
       "multiplierHint": "100 = contrato estándar de acciones de EE. UU.",
       "commissionRate": "Tasa de comisión (%)",
@@ -1694,6 +1695,31 @@
       "noData": "No se devolvieron contratos para esta selección.",
       "errorTitle": "Cadena de opciones no disponible",
       "retry": "Reintentar"
+    },
+    "expiryScenarios": {
+      "input": "Precios al vencimiento (opcional, separados por comas)",
+      "title": "Escenarios al vencimiento",
+      "spot": "Precio al vencimiento",
+      "pnl": "Ganancia/pérdida al vencimiento",
+      "return": "Rentabilidad sobre el nominal de acciones"
+    },
+    "comparison": {
+      "title": "Comparar estrategias",
+      "basis": "Guarda las patas y edita la estrategia para comparar. Comparten precio de entrada, posición en acciones, vencimiento y comisiones actuales. La rentabilidad usa el nominal inicial de las acciones; las opciones solas no tienen ese denominador.",
+      "current": "Estrategia actual",
+      "saved": "Estrategia {{index}}",
+      "save": "Guardar patas para comparar",
+      "remove": "Eliminar",
+      "metric": "Métrica",
+      "alternative": "Alternativa",
+      "baseline": "Base",
+      "difference": "Diferencia (puntos porcentuales)",
+      "max_profit_return": "Rentabilidad máxima",
+      "max_loss_return": "Rentabilidad mínima",
+      "entry_cost_return": "Coste de entrada / nominal de acciones",
+      "higher": "Mayor",
+      "lower": "Menor",
+      "equal": "Igual"
     }
   },
   "alphaZoo": {
@@ -1939,7 +1965,10 @@
     "detailsUnavailable": "detalles no disponibles",
     "tokens": "↑{{input}} ↓{{output}} tokens",
     "estimated": "estimados",
-    "tokenSourceUnlabeled": "fuente sin etiqueta"
+    "tokenSourceUnlabeled": "fuente sin etiqueta",
+    "partialResults": "Resultados parciales",
+    "report": "Informe",
+    "continueWork": "Continuar el trabajo pendiente"
   },
   "mandate": {
     "runtimeMandate": "Mandato de runtime del conector",
@@ -2745,5 +2774,25 @@
     "rolling": "Móvil",
     "expanding": "Expansiva",
     "invalidChoices": "Introduce un valor para cada opción."
+  },
+  "updates": {
+    "title": "Actualizaciones",
+    "preserve": "Se conservan la configuración, las credenciales y las conversaciones. Mantén la misma cuenta de instalación y los directorios de datos.",
+    "check": "Buscar actualizaciones",
+    "working": "Espera…",
+    "current": "Versión en ejecución: {{version}}",
+    "available": "Nueva versión disponible: {{version}}",
+    "currentLatest": "Última versión publicada: {{version}}. No hay una versión más reciente.",
+    "pip": "Ejecuta este comando en el entorno Python existente del servidor y reinicia el servicio.",
+    "container": "Actualiza la imagen o reconstruye el servicio en el host de despliegue con la configuración Compose original. Conserva todos los volúmenes de datos.",
+    "desktop": "Termina las tareas activas antes de actualizar. La aplicación se cerrará, instalará la actualización verificada y volverá a abrirse.",
+    "source": "Actualiza mediante el código fuente o el gestor de paquetes original, conservando cambios locales, extras y restricciones. Reinicia el mismo servicio.",
+    "manual": "Esta compilación no tiene un canal de actualización automática. Instala la siguiente versión de Desktop del distribuidor original sobre esta instalación y conserva los datos.",
+    "completed": "La versión de destino de Desktop y su backend han arrancado.",
+    "interrupted": "La actualización anterior no terminó correctamente. Revisa los registros antes de reintentar; no borres archivos de configuración ni recuperación.",
+    "install": "Actualizar y reiniciar",
+    "installing": "Descargando y verificando la actualización. La aplicación se reiniciará después de instalarla.",
+    "checkFailed": "No se pudieron buscar actualizaciones. Comprueba la conexión o el acceso al servidor e inténtalo de nuevo.",
+    "installFailed": "No se pudo iniciar la instalación. Tus datos se conservan. Revisa los registros y busca actualizaciones de nuevo."
   }
 }

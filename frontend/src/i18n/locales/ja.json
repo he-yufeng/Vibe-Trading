@@ -549,7 +549,7 @@
     "subtitle": "このローカルプロジェクトのモデル認証情報とマーケットデータソーストークンを設定します。",
     "unavailable": "設定は利用できません",
     "llmSettings": "LLM 設定",
-    "llmSettingsDesc": "エージェントが使用するモデルを選択し、プロジェクトローカルの agent/.env ファイルに保存します。",
+    "llmSettingsDesc": "エージェントが使用するモデルを選択し、~/.vibe-trading/.env に保存します。",
     "connection": "接続",
     "model": "モデル",
     "useProviderDefaults": "プロバイダーのデフォルトを使用",
@@ -1276,8 +1276,7 @@
       "failed": "失敗",
       "steps": "{{count}} ステップ",
       "continue": "続行",
-      "reattach": "再接続",
-      "checkingFigures": "回答内の数値を確認中（{{round}} 回目）…"
+      "reattach": "再接続"
     },
     "resumeConnector": "コネクタを再開",
     "resumeConnectorTitle": "キルスイッチを解除してコネクタ活動を再開",
@@ -1596,6 +1595,8 @@
       "expiryDays": "満期までの日数",
       "volatility": "ボラティリティ（%）",
       "riskFreeRate": "リスクフリー金利（%）",
+      "underlyingQty": "原資産の保有単位",
+      "underlyingQtyHint": "0：オプションのみ。1：倍率分の株式を保有（倍率100なら100株）。",
       "multiplier": "乗数",
       "multiplierHint": "100 = 米国株式標準契約",
       "commissionRate": "手数料率（%）",
@@ -1688,6 +1689,31 @@
       "noData": "この選択に対するコントラクトは返されませんでした。",
       "errorTitle": "オプションチェーンを利用できません",
       "retry": "再試行"
+    },
+    "expiryScenarios": {
+      "input": "満期価格（任意、カンマ区切り）",
+      "title": "満期シナリオ",
+      "spot": "満期時の価格",
+      "pnl": "満期損益",
+      "return": "株式想定元本に対する収益率"
+    },
+    "comparison": {
+      "title": "戦略比較",
+      "basis": "レッグを保存してから編集して比較します。現在の参入価格、株式保有、満期、手数料を共用します。収益率の分母は参入時の株式想定元本です。オプションのみでは分母はありません。",
+      "current": "現在の戦略",
+      "saved": "戦略 {{index}}",
+      "save": "比較用にレッグを保存",
+      "remove": "削除",
+      "metric": "指標",
+      "alternative": "代替戦略",
+      "baseline": "基準戦略",
+      "difference": "差（パーセントポイント）",
+      "max_profit_return": "最大収益率",
+      "max_loss_return": "最小収益率",
+      "entry_cost_return": "参入費用／株式想定元本",
+      "higher": "上回る",
+      "lower": "下回る",
+      "equal": "同じ"
     }
   },
   "alphaZoo": {
@@ -1920,6 +1946,9 @@
     "expiresAt": "{{time}} に失効"
   },
   "swarmStatus": {
+    "partialResults": "途中までの結果",
+    "report": "レポート",
+    "continueWork": "未完了の作業を続ける",
     "agents": "{{done}}/{{total}} エージェント",
     "layer": "第 {{current}} ラウンド（全 {{total}} ラウンド）",
     "agent": "エージェント",
@@ -2745,5 +2774,25 @@
     "rolling": "ローリング",
     "expanding": "拡張",
     "invalidChoices": "各候補に値を入力してください。"
+  },
+  "updates": {
+    "title": "ソフトウェア更新",
+    "preserve": "既存の設定、認証情報、会話を引き継ぎます。同じインストールアカウントとデータディレクトリを使用してください。",
+    "check": "更新を確認",
+    "working": "お待ちください…",
+    "current": "実行中のバージョン：{{version}}",
+    "available": "新しいバージョン：{{version}}",
+    "currentLatest": "最新リリース：{{version}}。これより新しいバージョンはありません。",
+    "pip": "サーバーの既存の Python 環境でこのコマンドを実行し、サービスを再起動してください。",
+    "container": "デプロイ先で元の Compose 設定を使ってイメージを更新するか再ビルドし、既存のデータボリュームをすべて保持してください。",
+    "desktop": "実行中の作業を終えてください。アプリを閉じ、検証済みの更新をインストールして再起動します。",
+    "source": "元のソースまたはパッケージ管理ツールで更新し、ローカル変更、追加依存関係、制約を保持してサービスを再起動してください。",
+    "manual": "このビルドに自動更新はありません。元の配布元の次の Desktop 版を上書きインストールし、ユーザーデータを保持してください。",
+    "completed": "更新先の Desktop とバックエンドが起動しました。",
+    "interrupted": "前回の更新は正常に完了しませんでした。ログを確認し、設定や復旧ファイルを削除しないでください。",
+    "install": "更新して再起動",
+    "installing": "更新をダウンロードして検証中です。インストール後に再起動します。",
+    "checkFailed": "更新を確認できません。接続やサーバーへのアクセスを確認して再試行してください。",
+    "installFailed": "インストーラーへの引き継ぎに失敗しました。データは保持されています。ログを確認し、更新を再確認してください。"
   }
 }
