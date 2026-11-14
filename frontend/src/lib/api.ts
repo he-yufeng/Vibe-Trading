@@ -589,7 +589,16 @@ export interface LabJob {
   result?: LabResult; error?: string; request?: Record<string, unknown>;
 }
 
+export interface SoftwareUpdate {
+  current_version: string;
+  latest_version: string | null;
+  available: boolean;
+  method: "wheel" | "editable" | "checkout" | "vcs" | "container" | "desktop" | "desktop-manual" | "desktop-unconfigured";
+  recovery?: string;
+}
+
 export const api = {
+  checkForUpdates: () => request<SoftwareUpdate>("/api/system/update"),
   getResearchLabCatalog: () => request<LabCatalog>("/api/research-lab/catalog"),
   startResearchLabJob: (action: LabAction, body: Record<string, unknown>) =>
     request<LabJob>("/api/research-lab/jobs", { method: "POST", body: JSON.stringify({ action, request: body }) }),
@@ -1070,6 +1079,9 @@ export interface SwarmRunSummary {
 }
 
 export interface LLMProviderOption {
+  backend?: string;
+  automatic_model_list?: boolean;
+  model_options?: string[];
   name: string;
   label: string;
   api_key_env?: string | null;
