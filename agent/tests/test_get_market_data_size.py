@@ -136,3 +136,23 @@ def test_multi_symbol_capped_independently(monkeypatch):
     )
     assert isinstance(out["BIG.US"], dict) and out["BIG.US"]["truncated"] is True
     assert isinstance(out["SMALL.US"], list) and len(out["SMALL.US"]) == 10
+
+
+def test_capped_payload_receipt_previews_only_the_ends(monkeypatch):
+    """A receipt is a delivery envelope, not the observation.
+
+    `_read_result` above already proves the artifact is complete and lossless.
+    This pins the other half of that contract: the inline preview must stay a
+    head-and-tail excerpt, so a caller cannot mistake it for the whole payload,
+    and the numbered parts must concatenate back to the saved result.
+    """
+    monkeypatch.setattr(mcp_server, "_get_loader", lambda src: _loader_with_rows(1000))
+    raw = _gmd(codes=["X.US"], start_date="2025-01-01", end_date="2026-01-01", source="yfinance")
+    response = json.loads(raw)
+    assert "X.US" not in response, "a receipt carries no inline symbol payload"
+    saved = Path(response["_result_file"]["path"]).read_text()
+    assert response["_preview"] == saved[:1000] + "\n...\n" + saved[-1000:]
+    assert len(response["_preview"]) < len(saved)
+    parts = sorted(Path(response["_result_file"]["parts_dir"]).iterdir(), key=lambda p: int(p.stem))
+    assert len(parts) == response["_result_file"]["part_count"] > 1
+    assert "".join(part.read_text() for part in parts) == saved
