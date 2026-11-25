@@ -201,7 +201,7 @@ In **Run Detail > Portfolio Studio > Risk X-Ray**, inspect the five deepest obse
 
 Risk X-Ray correlation summaries use only estimable pairs. A holding with constant returns does not hide correlations between other holdings; the average and strongest pair are unavailable when no pair can be estimated.
 
-This is a constant-weight return model, not account NAV, strategy P&L or a forecast. Backtests use the average executed basket weights; the model itself does not include fees or cash flows. Duration counts observed bar intervals from peak to recovery, or to the window's end if unrecovered, not calendar days. Daily, weekly and monthly observations retain their original labels.
+This is a constant-weight return model, not account NAV, strategy P&L or a forecast. Backtests use the average executed basket weights; the model itself does not include fees or cash flows. Duration counts observed bar intervals from peak to recovery, or to the window's end if unrecovered, not calendar days. Daily, weekly and monthly observations retain their original labels. On a continuous path, if the deepest drawdown starts from the initial wealth of 1, its peak date is the first shared close rather than the first return date.
 
 A missing interior return or non-positive/non-finite model wealth makes the periods unavailable, rather than an empty set or zero risk. Values within a relative `1e-12` of a running peak are treated as at that peak to avoid an extra recovery bar caused only by floating-point noise; smaller differences are not distinguished. The JSON report declares this as `recovery_rtol`. Existing scalar statistics and older reports without episode metadata remain supported.
 

@@ -72,6 +72,27 @@ def test_first_loss_uses_the_first_shared_close_as_the_peak():
     }
 
 
+@pytest.mark.parametrize(
+    ("prices", "peak_row"),
+    [([None, 128.0, 96.0, 48.0], 1), ([None, 128.0, 256.0, 96.0], 2)],
+    ids=["initial-close", "later-peak"],
+)
+def test_saved_max_drawdown_uses_the_observed_peak(
+    tmp_path: Path, prices: list[float | None], peak_row: int
+) -> None:
+    dates = pd.date_range("2026-01-01", periods=len(prices), freq="D")
+    closes = pd.DataFrame({"AAA": prices}, index=dates)
+    report = compute_risk_xray(closes, {"AAA": 1.0}, min_history=3)
+    artifact = tmp_path / "risk_xray.json"
+    write_risk_xray(artifact, report)
+
+    drawdown = json.loads(artifact.read_text(encoding="utf-8"))["drawdown"]
+    episode = drawdown["episodes"]["items"][0]
+    assert drawdown["max_drawdown"] == episode["depth"] == pytest.approx(-0.625)
+    assert drawdown["max_drawdown_trough"] == episode["trough"] == str(dates[-1])
+    assert drawdown["max_drawdown_start"] == episode["peak"] == str(dates[peak_row])
+
+
 def test_missing_inner_closes_do_not_invent_a_recovery_path():
     dates = pd.date_range("2026-01-01", periods=5, freq="D")
     closes = pd.DataFrame({"AAA": [100.0, 90.0, None, 80.0, 100.0]}, index=dates)
@@ -86,6 +107,7 @@ def test_missing_inner_closes_do_not_invent_a_recovery_path():
     assert episodes["total"] is None
     assert episodes["current"] is None
     assert report["inputs"]["return_observations"] == 2
+    assert report["drawdown"]["max_drawdown_start"] == str(dates[1])
     assert report["volatility"]["annualized_vol"] is not None
     json.dumps(report, allow_nan=False)
 

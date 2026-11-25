@@ -341,7 +341,12 @@ def _drawdown(
     dd = (equity - peak) / peak
     trough_idx = dd.idxmin()
     pre_trough = equity.loc[:trough_idx]
-    start_idx = port.index[0] if float(pre_trough.max()) < 1.0 else pre_trough.idxmax()
+    if float(pre_trough.max()) < 1.0:
+        start_idx = (
+            initial_label if complete and initial_label is not None else port.index[0]
+        )
+    else:
+        start_idx = pre_trough.idxmax()
     return {
         "max_drawdown": _finite(float(dd.loc[trough_idx])),
         "max_drawdown_start": str(start_idx),
